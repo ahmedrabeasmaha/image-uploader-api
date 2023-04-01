@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const Server_1 = require("./Core/Server");
+const Middleware_1 = require("./Middleware");
+const API_1 = require("./Routes/API");
+const CorsMiddleware_1 = require("./Middleware/CorsMiddleware");
+const app = new Server_1.Server();
+app.start(3000);
+app.middleware(new Middleware_1.JsonMiddleware());
+app.middleware(new Middleware_1.MulterMiddleware());
+app.middleware(new CorsMiddleware_1.CorsMiddleware());
+app.route(new API_1.FileRoute());
+app.route(new API_1.ImageRoute());
